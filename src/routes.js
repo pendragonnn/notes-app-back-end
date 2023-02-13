@@ -1,5 +1,5 @@
 const {  deleteNoteByIdHandler, 
-    editedNoteByIdHandler,
+    editNoteByIdHandler,
     addNoteHandler, 
     getAllNotesHandler, 
     getNoteByHandler 
@@ -24,7 +24,7 @@ const routes = [
     {
         method: 'PUT',
         path: '/notes/{id}',
-        handler: editedNoteByIdHandler,
+        handler: editNoteByIdHandler,
     },
     {
         method: 'DELETE',
