@@ -4,7 +4,7 @@ const mapDBToModel = ({
   body,
   tags,
   created_at,
-  updated_at
+  updated_at,
 }) => ({
   id,
   title,

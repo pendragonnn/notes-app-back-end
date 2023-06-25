@@ -1,4 +1,4 @@
-const ClientError = require("../../exceptions/ClientError");
+const ClientError = require('../../exceptions/ClientError');
 
 class NotesHandler {
   constructor(service, validator) {
@@ -30,22 +30,22 @@ class NotesHandler {
       response.code(201);
       return response;
     } catch (error) {
-      if(error instanceof ClientError) {
+      if (error instanceof ClientError) {
         const response = h.response({
           status: 'fail',
           message: error.message,
-          });
-          response.code(400);
-          return response;
-        }
-      
+        });
+        response.code(400);
+        return response;
+      }
+
       const response = h.response({
         status: 'error',
         message: 'Maaf, terjadi kegagalan pada server kami.',
-        });
-        response.code(500);
-        console.error(error);
-        return response;
+      });
+      response.code(500);
+      console.error(error);
+      return response;
     }
   }
 
@@ -71,22 +71,22 @@ class NotesHandler {
         },
       };
     } catch (error) {
-        if(error instanceof ClientError) {
-          const response = h.response({
-            status: 'fail',
-            message: error.message,
-            });
-            response.code(error.statusCode);
-            return response;
-          }
-        
+      if (error instanceof ClientError) {
         const response = h.response({
-          status: 'error',
-          message: 'Maaf, terjadi kegagalan pada server kami.',
-          });
-          response.code(500);
-          console.error(error);
-          return response;
+          status: 'fail',
+          message: error.message,
+        });
+        response.code(error.statusCode);
+        return response;
+      }
+
+      const response = h.response({
+        status: 'error',
+        message: 'Maaf, terjadi kegagalan pada server kami.',
+      });
+      response.code(500);
+      console.error(error);
+      return response;
     }
   }
 
@@ -96,29 +96,29 @@ class NotesHandler {
       const { id } = request.params;
       const { title, body, tags } = request.payload;
 
-       await this._service.editNoteById(id, { title, body, tags });
+      await this._service.editNoteById(id, { title, body, tags });
 
       return {
         status: 'success',
         message: 'Catatan berhasil diperbarui',
       };
     } catch (error) {
-      if(error instanceof ClientError) {
+      if (error instanceof ClientError) {
         const response = h.response({
           status: 'fail',
           message: error.message,
-          });
-          response.code(error.statusCode);
-          return response;
-        }
-      
+        });
+        response.code(error.statusCode);
+        return response;
+      }
+
       const response = h.response({
         status: 'error',
         message: 'Maaf, terjadi kegagalan pada server kami.',
-        });
-        response.code(500);
-        console.error(error);
-        return response;
+      });
+      response.code(500);
+      console.error(error);
+      return response;
     }
   }
 
@@ -126,7 +126,7 @@ class NotesHandler {
     try {
       const { id } = request.params;
       await this._service.deleteNoteById(id);
- 
+
       return {
         status: 'success',
         message: 'Catatan berhasil dihapus',
@@ -140,7 +140,7 @@ class NotesHandler {
         response.code(error.statusCode);
         return response;
       }
- 
+
       // Server ERROR!
       const response = h.response({
         status: 'error',
@@ -152,5 +152,5 @@ class NotesHandler {
     }
   }
 }
- 
+
 module.exports = NotesHandler;
